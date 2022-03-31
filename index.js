@@ -5,6 +5,9 @@ const cors = require('cors')
 
 const movieRoutes = require('./movieRoutes')
 
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, './.env') })
+
 app.use(
     express.urlencoded({
         extended:true
@@ -21,9 +24,12 @@ app.get('/', (req, res) => {
     res.json({message: 'Oi express!'})
 })
 
-mongoose.connect('mongodb+srv://herbert:41568106h@apicluster.4h1bh.mongodb.net/Filmes?retryWrites=true&w=majority')
+mongoose.connect(process.env.MONGO_URL)
 .then(() => {
     console.log('Conectamos ao MongoDB')
-    app.listen(5000)
 })
 .catch((err) => console.log(err))
+
+app.listen(5000, () => {
+    console.log(process.env.MONGO_URL)
+})

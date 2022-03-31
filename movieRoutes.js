@@ -10,6 +10,8 @@ router.post('/', async (req, res) => {
         return
     }
 
+    
+
     const movie = {
         name,
         genre,
@@ -97,10 +99,17 @@ router.delete('/:id', async (req, res) => {
 
     const id = req.params.id
 
+    const movies = await Movies.findOne({_id: id})
+
+    if(!movies){
+        res.status(422).json({message: 'Filme não encontrado'})
+        return
+    }
+
     try {
         
-        await Movies.deleteOne({_id: id})
-        res.status(200).json({message: 'Filme deletado com sucesso'})
+       await Movies.deleteOne({_id: id})
+       res.status(200).json({message: 'Filme deletado com sucesso'})
 
     } catch (error) {
         res.status(500).json({error: error})
