@@ -30,6 +30,6 @@ mongoose.connect(process.env.MONGO_URL)
 })
 .catch((err) => console.log(err))
 
-app.listen(5000, () => {
+app.listen(process.env.PORT, () => {
     console.log(process.env.MONGO_URL)
 })
