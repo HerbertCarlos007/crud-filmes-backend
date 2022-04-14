@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
 const cors = require('cors')
+const checkToken = require('./middlewares/checkToken')
 
 const movieRoutes = require('./routes/movieRoutes')
 const userRoutes = require('./routes/userRoutes')
@@ -19,7 +20,7 @@ app.use(cors())
 
 app.use(express.json())
 
-app.use('/movies', movieRoutes)
+app.use('/movies',checkToken, movieRoutes)
 app.use('/users', userRoutes)
 
 

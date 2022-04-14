@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Movies = require('../models/Movies')
 
+
 router.post('/', async (req, res) => {
     
     const {name, genre, synopsis, duration, url, urlImage, releaseYear} = req.body
