@@ -1,23 +1,22 @@
 const router = require('express').Router()
-const Movies = require('./models/Movies')
+const Movies = require('../models/Movies')
 
 router.post('/', async (req, res) => {
     
-    const {name, genre, synopsis, duration, url} = req.body
+    const {name, genre, synopsis, duration, url, urlImage, releaseYear} = req.body
 
     if(!name){
         res.status(422).json({error: 'O nome é obrigátorio'})
         return
     }
 
-    
-
     const movie = {
         name,
         genre,
         synopsis,
         duration,
-        url
+        url,
+        releaseYear
     }
 
     try {
@@ -31,6 +30,7 @@ router.post('/', async (req, res) => {
 
 })
 
+
 router.get('/', async (req, res) => {
     
     try {
@@ -42,7 +42,6 @@ router.get('/', async (req, res) => {
         res.status(500).json({error: error})
     }
 })
-
 
 router.get('/:id', async (req, res) => {
     
@@ -62,7 +61,6 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({error: error})
     }
 })
-
 
 router.patch('/:id', async (req, res) => {
     
@@ -93,8 +91,6 @@ router.patch('/:id', async (req, res) => {
     }
 })
 
-
-
 router.delete('/:id', async (req, res) => {
 
     const id = req.params.id
@@ -115,8 +111,5 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({error: error})
     }
 })
-
-
-
 
 module.exports = router

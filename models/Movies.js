@@ -6,7 +6,8 @@ const Movies = mongoose.model('Movies', {
     genre: String,
     synopsis: String,
     duration: String,
-    url: String
+    url: String,
+    releaseYear: String
 })
 
 module.exports = Movies
